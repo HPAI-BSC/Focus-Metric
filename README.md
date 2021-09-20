@@ -123,4 +123,4 @@ IEEE.
 Parés, F., Arias-Duart, A., Garcia-Gasulla, D., Campo-Francés, G., Viladrich, N.,
 Ayguadé, E., & Labarta, J. (2020). A Closer Look at Art Mediums: 
 The MAMe Image Classification Dataset. arXiv preprint arXiv:2007.13693.
-# Focus-Metric
+
