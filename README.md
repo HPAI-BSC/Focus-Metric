@@ -3,7 +3,7 @@
 We propose in [[1]](#1) a novel evaluation metric -- the _Focus_ -- 
 designed to quantify the faithfulness of explanations provided by feature 
 attribution methods. This repository contains the mosaics and the code needed to replicate the
-experiments in our paper: [Who Explains the Explanation? Quantitatively Assessing Feature AttributionMethods](). 
+experiments in our paper: [Who Explains the Explanation? Quantitatively Assessing Feature AttributionMethods](https://arxiv.org/abs/2109.15035v1). 
 
 Three explainability methods have been evaluated:
 * Smoothgrad [[7]](#7): the implementation used is based on the [work](https://github.com/wjNam/Relative_Attributing_Propagation) of Nam *et al.* 
