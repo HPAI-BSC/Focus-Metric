@@ -1,15 +1,17 @@
-# Focus metric - Quantitatively Assessing Feature Attribution Methods
+# Focus! Rating XAI Methods and Finding Biases with Mosaics
 
-We propose in [[1]](#1) a novel evaluation metric -- the _Focus_ -- 
-designed to quantify the faithfulness of explanations provided by feature 
-attribution methods. This repository contains the mosaics and the code needed to replicate the
-experiments in our paper: [Who Explains the Explanation? Quantitatively Assessing Feature AttributionMethods](https://arxiv.org/abs/2109.15035v1). 
+We propose in [[1]](#1) a consistent evaluation metric for feature attribution methods -- the _Focus_ -- 
+designed to quantify their coherency to the task. This repository contains the mosaics and the code needed to replicate the
+experiments in our paper: [Focus! Rating XAI Methods and Finding Biases with Mosaics](https://arxiv.org/abs/2109.15035). 
 
-Three explainability methods have been evaluated:
-* Smoothgrad [[7]](#7): the implementation used is based on the [work](https://github.com/wjNam/Relative_Attributing_Propagation) of Nam *et al.* 
+Six explainability methods have been evaluated:
+* Smoothgrad [[10]](#10): the implementation used is based on the [work](https://github.com/wjNam/Relative_Attributing_Propagation) of Nam *et al.* 
 * Layer-wise Relevance Propagation (LRP) [[2]](#2): the implementation used is based on the [work](https://github.com/kazuto1011/grad-cam-pytorch) of Nakashima *et al.*
-* GradCAM [[6]](#6): The implementation is based on the [work](https://github.com/jacobgil/pytorch-grad-cam)
+* GradCAM [[9]](#9): the implementation used is based on the [work](https://github.com/jacobgil/pytorch-grad-cam)
 of Gildenblat *et al.*
+* LIME [[7]](#7): the implementation used is based on the [work](https://github.com/marcotcr/lime) of Tulio *et al.*
+* GradCAM++ [[3]](#3): the implementation used is based on the [work](https://github.com/jacobgil/pytorch-grad-cam) of Gildenblat *et al.*
+* Integrated Gradients (IG) [[11]](#11): the implementation used is based on the [work](https://github.com/pytorch/captum) of Kokhlikyan *et al.* [[4]](#4).
 
 
 
@@ -23,9 +25,9 @@ This code runs under Python 3.7.1. The python dependencies are defined in `requi
 We provide already created mosaics from four different datasets:
 
 * [Dogs vs. Cats](https://www.kaggle.com/c/dogs-vs-cats/overview) mosaics can be downloaded [here](https://storage.hpai.bsc.es/focus-metric/catsdogs_mosaic.zip)
-* ILSVRC 2012 [[5]](#5) mosaics can be downloaded [here](https://storage.hpai.bsc.es/focus-metric/ilsvrc2012_mosaic.zip).
-* MIT67 [[4]](#4) mosaics can be downloaded [here](https://storage.hpai.bsc.es/focus-metric/mit67_mosaic.zip).
-* MAMe [[3]](#3) mosaics can be downloaded [here](https://storage.hpai.bsc.es/focus-metric/mame_mosaic.zip).
+* ILSVRC 2012 [[8]](#8) mosaics can be downloaded [here](https://storage.hpai.bsc.es/focus-metric/ilsvrc2012_mosaic.zip).
+* MIT67 [[6]](#6) mosaics can be downloaded [here](https://storage.hpai.bsc.es/focus-metric/mit67_mosaic.zip).
+* MAMe [[5]](#5) mosaics can be downloaded [here](https://storage.hpai.bsc.es/focus-metric/mame_mosaic.zip).
 
 
 
@@ -53,19 +55,10 @@ To run both steps execute the following bash scripts:
 > `sh evaluation_dataset_architecture_method.sh`
 
 where:
-  * <span style="color:#f5b041">**dataset**</span> must be exchanged by 
-  one of the following options: <span style="color:#f5b041">**catsdogs**</span>, 
-  <span style="color:#f5b041">**ilsvrc2012**</span>,
-  <span style="color:#f5b041">**mit67**</span> or
-  <span style="color:#f5b041">**mame**</span>. 
-  * <span style="color: #48c9b0 ">**architecture**</span> must be exchanged by
-  one of the following options: <span style="color: #48c9b0 ">**alexnet**</span>,
-  <span style="color: #48c9b0 ">**vgg16**</span> or 
-  <span style="color: #48c9b0 ">**resnet18**</span>.
-  * And <span style="color: #c39bd3 ">**method**</span> mus be exchanged by 
-  <span style="color: #c39bd3 ">**smoothgrad**</span>, 
-  <span style="color: #c39bd3 ">**lrp**</span> or 
-  <span style="color: #c39bd3 ">**gradcam**</span>.
+  * **dataset** must be exchanged by 
+  one of the following options: **catsdogs**, **ilsvrc2012**, **mit67** or **mame**. 
+  * **architecture** must be exchanged by one of the following options: **alexnet**, **vgg16** or **resnet18**.
+  * **method** must be exchanged by **smoothgrad**, **lrp**, **gradcam**, **lime**, **gradcampp** or **intgrad**.
 
 
 For example, to get the _Focus_ of the Dogs vs. Cats dataset,
@@ -85,8 +78,8 @@ run the following:
 ## Cite
 Please cite our paper when using this code. 
 ```
-@misc{ariasduart2021explains,
-      title={Who Explains the Explanation? Quantitatively Assessing Feature Attribution Methods}, 
+@misc{ariasduart2021focus,
+      title={Focus! Rating XAI Methods and Finding Biases with Mosaics}, 
       author={Anna Arias-Duart and Ferran Parés and Dario Garcia-Gasulla},
       year={2021},
       eprint={2109.15035},
@@ -99,7 +92,8 @@ Please cite our paper when using this code.
 
 ## References
 <a id="1">[1]</a>
-Arias-Duart, A., Parés, F., & Garcia-Gasulla, D. (2021). Who Explains the Explanation? Quantitatively Assessing Feature Attribution Methods. arXiv preprint arXiv:2109.15035.
+Arias-Duart, A., Parés, F., & García-Gasulla, D. (2021). Focus! Rating XAI Methods and Finding Biases with Mosaics. arXiv preprint arXiv:2109.15035
+
 
 <a id="2">[2]</a>
 Bach, S., Binder, A., Montavon, G., Klauschen, F., Müller, K. R., & Samek,
@@ -107,28 +101,42 @@ W. (2015). On pixel-wise explanations for non-linear classifier decisions
 by layer-wise relevance propagation. PloS one, 10(7), e0130140.
 
 <a id="3">[3]</a>
+Chattopadhay, A., Sarkar, A., Howlader, P., & Balasubramanian, V. N. (2018, March). Grad-cam++: Generalized gradient-based visual explanations for deep convolutional networks. In 2018 IEEE winter conference on applications of computer vision (WACV) (pp. 839-847). IEEE.
+
+<a id="4">[4]</a>
+Kokhlikyan, N., Miglani, V., Martin, M., Wang, E., Alsallakh, B., Reynolds, J., ... & Reblitz-Richardson, O. (2020). Captum: A unified and generic model interpretability library for pytorch. arXiv preprint arXiv:2009.07896.
+
+
+<a id="5">[5]</a>
 Parés, F., Arias-Duart, A., Garcia-Gasulla, D., Campo-Francés, G., Viladrich, N.,
 Ayguadé, E., & Labarta, J. (2020). A Closer Look at Art Mediums: 
 The MAMe Image Classification Dataset. arXiv preprint arXiv:2007.13693.
 
-<a id="4">[4]</a>
+<a id="6">[6]</a>
 Quattoni, A., & Torralba, A. (2009, June). Recognizing indoor scenes. 
 In 2009 IEEE Conference on Computer Vision and Pattern Recognition (pp. 413-420). 
 IEEE.
 
-<a id="5">[5]</a>
+<a id="7">[7]</a>
+Ribeiro, M. T., Singh, S., & Guestrin, C. (2016, August). " Why should i trust you?" Explaining the predictions of any classifier. In Proceedings of the 22nd ACM SIGKDD international conference on knowledge discovery and data mining (pp. 1135-1144).
+
+<a id="8">[8]</a>
 Russakovsky, O., Deng, J., Su, H., Krause, J., Satheesh, S., Ma, S., ... & Fei-Fei,
 L. (2015). Imagenet large scale visual recognition challenge. International journal
 of computer vision, 115(3), 211-252.
 
 
-<a id="6">[6]</a>
+<a id="9">[9]</a>
 Selvaraju, R. R., Cogswell, M., Das, A., Vedantam, R., Parikh, D., & Batra,
 D. (2017). Grad-cam: Visual explanations from deep networks via gradient-based
 localization. In Proceedings of the IEEE international conference on computer
 vision (pp. 618-626).
 
-<a id="7">[7]</a>
+<a id="10">[10]</a>
 Smilkov, D., Thorat, N., Kim, B., Viégas, F., & Wattenberg, M. (2017). 
 Smoothgrad: removing noise by adding noise. arXiv preprint arXiv:1706.03825.
+
+<a id="11">[11]</a>
+Sundararajan, M., Taly, A., & Yan, Q. (2017, July).
+Axiomatic attribution for deep networks. In International Conference on Machine Learning (pp. 3319-3328). PMLR.
 
