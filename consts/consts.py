@@ -29,9 +29,10 @@ class MosaicArgs(EnumConstant):
 class XmethodArgs(EnumConstant):
     LRP = 'lrp'
     GRADCAM = 'gradcam'
-    EDGES = 'edges'
+    GRADCAMPLUSPLUS = 'gradcam++'
     SMOOTHGRAD = 'smoothgrad'
-
+    INTGRAD = 'intgrad'
+    LIME = 'lime'
 
 class ArchArgs(EnumConstant):
     RESNET18 = 'resnet18'

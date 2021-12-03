@@ -5,7 +5,10 @@ from dataset_manager.datasets import CatsDogsMosaic, Mit67Mosaic, Ilsvrc2012Mosa
 from consts.consts import MosaicArgs, ArchArgs, XmethodArgs
 from explainability.lrp.lrp import LRP
 from explainability.gradcam.gradcam import Gradcam
+from explainability.gradcam_plusplus.gradcampp import GradcamPP
 from explainability.gradients.smoothgrad import SmoothGrad
+from explainability.lime.lime import Lime
+from explainability.integrated_gradients.integrated_gradients import IntegratedGradients
 
 DATASETS = {
     MosaicArgs.CATSDOGS_MOSAIC: CatsDogsMosaic,
@@ -23,5 +26,8 @@ ARCHITECTURE = {
 XMETHOD = {
     XmethodArgs.LRP: LRP,
     XmethodArgs.GRADCAM: Gradcam,
+    XmethodArgs.GRADCAMPLUSPLUS: GradcamPP,
     XmethodArgs.SMOOTHGRAD: SmoothGrad,
+    XmethodArgs.INTGRAD: IntegratedGradients,
+    XmethodArgs.LIME: Lime,
 }
